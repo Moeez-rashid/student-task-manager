@@ -36,9 +36,11 @@ def handle_complete(manager):
     except ValueError:
         print("Error: please enter numeric task ids, e.g. 1,3")
         return
-    completed, not_found = manager.complete_tasks(task_ids)
+    completed, already_done, not_found = manager.complete_tasks(task_ids)
     for task_id in completed:
         print(f"Task {task_id} marked as completed.")
+    for task_id in already_done:
+        print(f"Task {task_id} was already completed.")
     for task_id in not_found:
         print(f"Task {task_id} not found.")
 
