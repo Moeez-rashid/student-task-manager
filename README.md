@@ -1,2 +1,9 @@
 # student-task-manager
-Python console Student Task Manager — CSC418 DevOps Lab Assignment 4 (Git &amp; GitHub workflow)
+
+A Python console application for managing student tasks, built for the CSC418 DevOps for Cloud Computing lab (Assignment 4).
+
+Run it with:
+
+```bash
+python main.py
+```
