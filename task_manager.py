@@ -20,6 +20,10 @@ class Task:
         return f"[{mark}] {self.id}. {self.title}"
 
 
+class TaskNotFoundError(LookupError):
+    """Raised when no task has the requested id."""
+
+
 class TaskManager:
     """Keeps the list of tasks and the operations on it."""
 
@@ -76,11 +80,12 @@ class TaskManager:
         return None
 
     def delete_task(self, task_id):
+        """Delete the task with this id. Raises TaskNotFoundError if unknown."""
         for task in self.tasks:
             if task.id == task_id:
                 self.tasks.remove(task)
                 return task
-        return None
+        raise TaskNotFoundError(f"No task with id {task_id}.")
 
     # ----- persistence -------------------------------------------------
 
