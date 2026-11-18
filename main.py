@@ -43,6 +43,10 @@ def handle_delete(manager):
     if not raw.isdigit():
         print("Error: the task id must be a positive whole number.")
         return
+    confirm = input(f"Delete task {raw}? (y/n): ").strip().lower()
+    if confirm != "y":
+        print("Delete cancelled.")
+        return
     try:
         task = manager.delete_task(int(raw))
     except TaskNotFoundError as error:
