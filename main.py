@@ -1,6 +1,6 @@
 """Console interface for the Student Task Manager."""
 
-from task_manager import TaskManager
+from task_manager import TaskManager, TaskNotFoundError
 
 DATA_FILE = "tasks.json"
 
@@ -39,12 +39,16 @@ def handle_complete(manager):
 
 
 def handle_delete(manager):
-    task_id = int(input("Task id to delete: "))
-    task = manager.delete_task(task_id)
-    if task:
-        print(f"Deleted task {task.id}.")
-    else:
-        print("Task not found.")
+    raw = input("Task id to delete: ").strip()
+    if not raw.isdigit():
+        print("Error: the task id must be a positive whole number.")
+        return
+    try:
+        task = manager.delete_task(int(raw))
+    except TaskNotFoundError as error:
+        print(f"Error: {error}")
+        return
+    print(f"Deleted task {task.id}: {task.title}")
 
 
 def main():
