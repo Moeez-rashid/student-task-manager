@@ -7,3 +7,5 @@ Run it with:
 ```bash
 python main.py
 ```
+
+Project status: Planning
