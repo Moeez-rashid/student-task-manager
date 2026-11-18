@@ -46,7 +46,29 @@ class TaskManager:
     def list_tasks(self):
         return list(self.tasks)
 
+    def complete_tasks(self, task_ids):
+        """Mark several selected tasks as completed.
+
+        Returns a tuple (completed, already_done, not_found) of task ids.
+        """
+        completed, already_done, not_found = [], [], []
+        for task_id in task_ids:
+            task = self.get_task(task_id)
+            if task is None:
+                not_found.append(task_id)
+            elif task.completed:
+                already_done.append(task_id)
+            else:
+                task.completed = True
+                completed.append(task_id)
+        return completed, already_done, not_found
+
+    def get_task(self, task_id):
+        """Return the task with this id, or None."""
+        return next((t for t in self.tasks if t.id == task_id), None)
+
     def complete_task(self, task_id):
+        """Mark one task as completed. Returns the task, or None if not found."""
         for task in self.tasks:
             if task.id == task_id:
                 task.completed = True
