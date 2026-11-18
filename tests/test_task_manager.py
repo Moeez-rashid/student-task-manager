@@ -63,7 +63,7 @@ class TestDeleteTask(unittest.TestCase):
         deleted = self.manager.delete_task(2)
         self.assertEqual(deleted.title, "Delete me")
         remaining = [task.title for task in self.manager.list_tasks()]
-        self.assertEqual(remaining, ["Keep me", "Delete me"])
+        self.assertEqual(remaining, ["Keep me"])
 
     def test_delete_unknown_task_raises(self):
         with self.assertRaises(TaskNotFoundError):
