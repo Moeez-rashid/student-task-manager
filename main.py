@@ -2,6 +2,8 @@
 
 from task_manager import TaskManager
 
+DATA_FILE = "tasks.json"
+
 MENU = """
 ===== Student Task Manager =====
 1. Add task
@@ -46,7 +48,7 @@ def handle_delete(manager):
 
 
 def main():
-    manager = TaskManager()
+    manager = TaskManager(DATA_FILE)
     actions = {
         "1": handle_add,
         "2": handle_display,
@@ -64,6 +66,7 @@ def main():
             print("Invalid option, try again.")
             continue
         action(manager)
+        manager.save()
 
 
 if __name__ == "__main__":
