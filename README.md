@@ -8,4 +8,4 @@ Run it with:
 python main.py
 ```
 
-Project status: In development — core features complete
+Project status: In development — core features complete; automated testing in progress
