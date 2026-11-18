@@ -6,6 +6,8 @@ MENU = """
 ===== Student Task Manager =====
 1. Add task
 2. Display tasks
+3. Mark task as completed
+4. Delete task
 0. Exit
 """
 
@@ -25,9 +27,32 @@ def handle_display(manager):
         print(task)
 
 
+def handle_complete(manager):
+    task_id = int(input("Task id to complete: "))
+    task = manager.complete_task(task_id)
+    if task:
+        print(f"Task {task.id} marked as completed.")
+    else:
+        print("Task not found.")
+
+
+def handle_delete(manager):
+    task_id = int(input("Task id to delete: "))
+    task = manager.delete_task(task_id)
+    if task:
+        print(f"Deleted task {task.id}.")
+    else:
+        print("Task not found.")
+
+
 def main():
     manager = TaskManager()
-    actions = {"1": handle_add, "2": handle_display}
+    actions = {
+        "1": handle_add,
+        "2": handle_display,
+        "3": handle_complete,
+        "4": handle_delete,
+    }
     while True:
         print(MENU)
         choice = input("Choose an option: ").strip()
