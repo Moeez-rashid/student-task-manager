@@ -28,6 +28,10 @@ class TaskManager:
         self.load()
 
     def add_task(self, title):
+        """Add a task after validating its title. Raises ValueError if empty."""
+        title = (title or "").strip()
+        if not title:
+            raise ValueError("Task title cannot be empty.")
         task = Task(id=self._next_id, title=title)
         self.tasks.append(task)
         self._next_id += 1
